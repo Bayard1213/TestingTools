@@ -1,0 +1,46 @@
+.customcard{
+    width: 200px;
+    max-height: 400px;
+    overflow: auto;
+    background-color: rgb(33, 37, 41);
+    border-color: rgb(134, 142, 150);
+}
+.leftlist{
+    width: 280px;
+    position: fixed;
+    z-index: 99;
+}
+.customfooter{
+    background-color: rgb(33, 37, 41);
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    width: 100%;
+}
+.addform{
+    position: fixed; 
+    width: 400px; 
+    right: 50px; 
+    border: 1px solid;
+    border-color: rgb(134, 142, 150);
+    background-color: rgb(33, 37, 41);
+}
+
+.jsonForm{
+    left: auto;
+    right: auto;
+    border: 1px solid;
+    border-color: rgb(134, 142, 150);
+    background-color: rgb(33, 37, 41);
+}
+
+.closeButton{
+    background-color:rgb(244, 27, 49);
+    width: 35px;
+    height: 35px;
+    border: 0;
+    background-repeat:no-repeat;
+    background-image: url("../images/close-svgrepo-com-white.svg");
+    background-size: 25px;
+    background-position: center;
+}

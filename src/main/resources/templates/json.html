@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>JSONGen</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="flex-column text-bg-dark">
+	<div th:insert="fragments/leftList :: leftList" class="leftlist"></div>
+    <main style="margin-left: 30%; width: 800px;">
+            <h2 class="py-4 text-center">JSONGen</h2>
+            <form id="dataForm" method="post" action="/json" class="jsonForm p-5 shadow rounded-2 row m-5 g-2">
+                <!-- Тип данных -->
+                <div id="fieldsContainer"></div>
+
+                <button type="button" id="addFieldButton" class="btn btn-secondary mb-3 mt-4">Добавить новое поле</button>
+                <input class=" btn btn-primary btn-1g shadow" type="submit" value="Сгенерировать JSON">
+              
+              <!-- Поля для шаблонов с id для JavaScript ссылок -->
+              <script type="text/html" id="stringTemplate">
+                <input name="string" placeholder="Введите длину строки" class="form-control" required type="number" min="0" max="100">
+              </script>
+              <script type="text/html" id="phoneTemplate">
+                <select name="phone" class="form-select">
+                    <option value="8(xxx)xxxxxxx">
+                        8(xxx)xxxxxxx
+                    </option>
+                    <option value="+7(xxx)xxxxxxx">
+                        +7(xxx)xxxxxxx
+                    </option>
+                    <option value="8xxxxxxxxxx">
+                        8xxxxxxxxxx
+                    </option>
+                    <option value="+7xxxxxxxxx">
+                        +7xxxxxxxxxx
+                    </option>
+                </select>
+              </script>
+              <script type="text/html" id="integerTemplate">
+                <input name="inputMin" id="inputMin" placeholder="min" style="height: 20px;" class="form-control" required type="number" min="-2147483647" max="2147483646">
+                <input name="inputMax" id="inputMax" placeholder="max" style="height: 20px;" class="form-control" required type="number" min="-2147483647" max="2147483646">
+              </script>
+              <script type="text/html" id="booleanTemplate">
+                <select name="boolean" class="form-select">
+                    <option value="random">
+                        random
+                    </option>
+                    <option value="true">
+                        true
+                    </option>
+                    <option value="false">
+                        false
+                    </option>
+                </select>
+              </script>
+              <script type="text/html" id="dateTemplate">
+                <input name="date" placeholder="UTC+0" class="form-control" readonly>
+              </script>
+              <script type="text/html" id="emailTemplate">
+                <input name="email" placeholder="random@email.com" readonly  class="form-control">
+              </script>
+              <!-- patterns end  -->
+              <script type="text/html" id ="typeTemplate">
+                <select id="dataType" class="form-select">
+                    <option value="">Выберите тип</option>
+                    <option value="string">Строка</option>
+                    <option value="phone">Номер телефона</option>
+                    <option value="integer">Целочисленное</option>
+                    <option value="boolean">Булево значение</option>
+                    <option value="date">Текущая дата</option>
+                    <option value="email">E-mail</option>
+                  </select>
+              </script>
+
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <script>
+               $(document).ready(function(){
+                var groupIndex=0;
+
+                $('#addFieldButton').click(function(){
+                    groupIndex++;
+                    var newTypeFieldId= 'dataType' + groupIndex;
+                    var newTemplateFieldsId = 'templateFields' + groupIndex;
+
+                    var typeTemplateHtml = $($('#typeTemplate').html()).clone();
+                    typeTemplateHtml.find('select').attr('id',newTypeFieldId);
+
+                    var fieldGroup = $('<div class="fieldGroup row "></div>');
+                    fieldGroup.append('<div class="keyFields col-md-4 g-3"><input name="key" placeholder="Введите имя ключа" class="form-control" type="text" required maxlength = "100"></div>')
+                    fieldGroup.append('<div class="typeFields col-md-4 g-3"></div>').find('.typeFields').append(typeTemplateHtml);
+                    fieldGroup.append('<div id="' + newTemplateFieldsId + '" class="templateFields col-md-3 g-3"></div>');
+
+                    // Добавление кнопки удаления
+                    var deleteButton = $('<button type="button" class="removeFieldButton col-md-1 g-3 closeButton btn btn-danger"></button>');
+                    fieldGroup.append(deleteButton);
+
+                    $('#fieldsContainer').append(fieldGroup);
+                });
+
+                $('#fieldsContainer').on('click', '.removeFieldButton', function() {
+                    $(this).closest('.fieldGroup').remove();
+                });
+
+                $('#fieldsContainer').on('change','select[id^="dataType"]',function(){
+                    var selectedType=$(this).val();
+                    var templateFieldsId = $(this).closest('.fieldGroup').find('.templateFields').attr('id');
+
+                    $('#' + templateFieldsId).empty();
+                    if (selectedType){
+                        var templateHtml = $('#' + selectedType + 'Template').html();
+                        $('#' + templateFieldsId).append(templateHtml);
+                    }
+                });
+               });
+             </script>
+            </form>
+    </main>
+    <script th:src="@{/js/jsonHelper.js}"></script>
+</body>
+<footer th:insert="fragments/footer :: footer" class="customfooter"></footer>
+</html>
