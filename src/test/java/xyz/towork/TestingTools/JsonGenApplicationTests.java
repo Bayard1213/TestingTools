@@ -1,4 +1,4 @@
-package xyz.towork.JsonGen;
+package xyz.towork.TestingTools;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

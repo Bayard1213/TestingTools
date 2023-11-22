@@ -1,4 +1,4 @@
-package xyz.towork.JsonGen.utils;
+package xyz.towork.TestingTools.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import xyz.towork.TestingTools.utils.JsonUtil;
 
 public class JsonUtilTest {
 
@@ -87,10 +86,10 @@ public class JsonUtilTest {
     //проверка на корректность диапазона 
     @Test
     void testGenerateRandomIntegerWithinRange() {
-        String minMaxValue = "1-100";
+        String minMaxValue = "1:100";
         int randomInteger = JsonUtil.generateRandomInteger(minMaxValue);
 
-        String[] parts = minMaxValue.split("-");
+        String[] parts = minMaxValue.split(":");
         int min = Integer.parseInt(parts[0]);
         int max = Integer.parseInt(parts[1]);
 

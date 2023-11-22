@@ -123,7 +123,7 @@ public class JsonUtil {
 
         generatedEmail.append("@");
         //генерируем доменное имя
-        int domainLength = random.nextInt(25) + 2;
+        int domainLength = random.nextInt(21) + 1;
         generatedEmail.append(DOMAIN_CHARS.charAt(random.nextInt(DOMAIN_CHARS.length() - 1)));
 
         for (int i = 1; i < domainLength - 1; i++) {
