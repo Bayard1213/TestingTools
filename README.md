@@ -65,4 +65,8 @@ firefox localhost:8088/
 ```
 Если есть необходимость изменить порт, в файле `/TestingTools/src/main/resources/application.properties` меняем значение строки `server.port=8088`.<br>  Если хостим на своем сервере - меняем относительный рут `server.servlet.contextPath=/TestingTools-0.0.1-SNAPSHOT/` на имя, которое используется для приложения на сервере 
 
+Лицензия
+--------
+Этот проект лицензирован согласно лицензии MIT - см. файл [LICENSE](https://github.com/Bayard1213/TestingTools/blob/main/LICENSE) для деталей.
+
 <br><hr> 
