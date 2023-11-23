@@ -6,6 +6,7 @@
 Java version: 20.0.1, vendor: Oracle Corporation, runtime: jdk-20<br>
 spring-boot 3.2.0<br>
 Apache Maven 3.9.4<br>
+Все используемые зависимости можно посмотреть в [pox.xml](https://github.com/Bayard1213/TestingTools/blob/main/pom.xml)
 
 Актуальные war-пакеты можно найти в [релизах](https://github.com/Bayard1213/TestingTools/releases)
 
